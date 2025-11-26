@@ -1,0 +1,34 @@
+{
+	"name": "377-final-project",
+	"version": "1.0.0",
+	"description": "Chrome, Firefox",
+	"main": "main.js",
+	"directories": {
+		"doc": "docs"
+	},
+	"scripts": {
+		"start": "node --env-file=.env main.js",
+		"dev": "nodemon --env-file=.env main.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wflore19/377-Final-Project.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/wflore19/377-Final-Project/issues"
+	},
+	"homepage": "https://github.com/wflore19/377-Final-Project#readme",
+	"dependencies": {
+		"@supabase/supabase-js": "^2.85.0",
+		"ejs": "^3.1.10",
+		"express": "^5.1.0"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.11"
+	}
+}

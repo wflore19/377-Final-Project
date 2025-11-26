@@ -1,0 +1,26 @@
+import { v4 as uuidv4 } from "uuid";
+import supabase from "../config/database.js";
+
+async function cookieMiddleware(req, res, next) {
+    if (!req.cookies.user_id) {
+        const userId = uuidv4();
+    
+        res.cookie('user_id', userId, { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true });
+
+        // save to database
+        const { data, error } = await supabase
+            .from('users')
+            .insert([
+                { id: userId },
+            ])
+            .select()
+        console.log(data, error);
+    
+        console.log(`New anonymous user assigned ID: ${userId}`);
+    } else {
+        console.log(`User already has ID: ${req.cookies.user_id}`);
+    }
+    next();
+}
+
+export default cookieMiddleware;

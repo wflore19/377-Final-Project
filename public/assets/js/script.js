@@ -1,5 +1,8 @@
-const form = document.querySelector("#like-quote");
-form.addEventListener("submit", function(event) {
+const currentPage = window.location.pathname;
+
+if (currentPage === "/") {
+    const likeForm = document.querySelector("#like-quote");
+    likeForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
     try {
@@ -16,10 +19,42 @@ form.addEventListener("submit", function(event) {
             body: JSON.stringify({ quoteId: quoteId, quoteText: quoteText, quoteAuthor: quoteAuthor })
         });
     
-        console.log("You liked the quote!");
     } catch (error) {
         console.error("Error liking quote:", error);
         console.log("There was an error liking the quote. Please try again.");
     }
 });
-console.log(form);
+}
+else if (currentPage === "/about") {}
+else if (currentPage === "/project") {}
+else if (currentPage === "/quotes") {
+    console.log("On quotes page");
+    const unlikeForm = document.querySelector("#unlike-quote");
+    
+    if (unlikeForm) {
+        unlikeForm.addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            try {
+                const formData = new FormData(event.target);
+                const quoteId = formData.get("quoteId");
+                const quoteText = formData.get("quoteText");
+                const quoteAuthor = formData.get("quoteAuthor");
+            
+                const response = fetch("/quotes/unlike", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ quoteId: quoteId, quoteText: quoteText, quoteAuthor: quoteAuthor })
+                });
+
+                const result = await response.json();
+                console.log("Quote successfully unliked:", result);
+            } catch (error) {
+                console.error("Error unliking quote:", error);
+                console.log("There was an error unliking the quote. Please try again.");
+            }
+        });
+    }
+}

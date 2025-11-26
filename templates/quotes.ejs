@@ -18,6 +18,28 @@
       </section>
 
       <section class="section container">
+        <h2>My Saved Quotes</h2>
+        <% if (savedQuotes && savedQuotes.length > 0) { %>
+          <div class="quotes_list">
+            <% savedQuotes.forEach((item) => { %>
+              <blockquote>
+                <p>“<%= item.quote.quote %>”</p>
+                <cite>— <%= item.quote.author || 'Unknown' %></cite>
+              </blockquote>
+              <form id="unlike-quote" method="DELETE">
+                <input type="hidden" name="quoteId" value="<%= item.quote.id %>">
+                <input type="hidden" name="quoteText" value="<%= item.quote.quote %>">
+                <input type="hidden" name="quoteAuthor" value="<%= item.quote.author %>">
+                <button type="submit">Unlike</button>
+              </form>
+            <% }); %>
+          </div>
+        <% } else { %>
+          <p>No saved quotes found.</p>
+        <% } %>
+      </section>
+
+      <section class="section container">
         <h2>Quotations</h2>
         <div class="quotes_list">
           <blockquote>

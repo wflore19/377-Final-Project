@@ -1,0 +1,121 @@
+<%- include("component/head") %>
+<body>
+	<div id="page-container">
+		<%- include("component/header") %>
+
+		<main id="main-area">
+			<section class="container">
+				<!-- Quotes go here -->
+				<% if (quote && quote.quote) { %>
+				  <p class="quote">
+				    <%= quote.quote %><br>
+				    <span class="quote-author">— <%= quote.author || 'Unknown' %></span>
+					<!-- like button -->
+					<form id="like-quote" action="/quotes/like" method="POST">
+						<input type="hidden" name="quoteId" value="<%= quote.id %>">
+						<input type="hidden" name="quoteText" value="<%= quote.quote %>">
+						<input type="hidden" name="quoteAuthor" value="<%= quote.author %>">
+						<button type="submit">Like</button>
+					</form>
+				  </p>
+				<% } else { %>
+				  <p class="quote">No quote available. <a href="/quotes">See all quotes</a></p>
+				<% } %>
+			</section>
+
+			<section class="hero container">
+				<div class="columns">
+					<div class="col">
+						<h4>Discover the Essence of Zen</h4>
+						<h5>Welcome to Zen Library</h5>
+						<p>
+							Immerse yourself in a world of tranquility and
+							wisdom with our collection of Zen literature, prints
+							and gifts.
+						</p>
+						<a class="button-1" href="#">Explore Now</a>
+					</div>
+					<div class="col">
+						<img
+							src="./images/zen_books_rotation_fade_white_hold.gif"
+							alt="Books" />
+					</div>
+				</div>
+			</section>
+
+			<section class="section container">
+				<h2>Explore Our Key Features</h2>
+				<div class="features">
+					<div class="feature">
+						<img
+							src="./images/obpce_x3j6u-300x200.jpg"
+							alt="Feature 1" />
+						<h4>Growing Book Collection</h4>
+						<p>
+							Delve into a diverse range of Zen Buddhist books,
+							from timeless classics to contemporary writings.
+						</p>
+						<a class="button-1" href="#">Browse Books</a>
+					</div>
+					<div class="feature">
+						<img
+							src="./images/b_ypsowj3uu-300x200.jpg"
+							alt="Feature 2" />
+						<h4>Insightful Articles</h4>
+						<p>
+							Read articles that offer fresh perspectives and
+							insights into Zen practices and teachings.
+						</p>
+						<a class="button-1" href="#">Read Articles</a>
+					</div>
+					<div class="feature">
+						<img
+							src="./images/6clboiwuzsu-300x200.jpg"
+							alt="Feature 3" />
+						<h4>Free & Paid Resources</h4>
+						<p>
+							We offer free resources and carefully curated paid
+							products that support the site.
+						</p>
+						<a class="button-1" href="#">Support our Shop</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="section container">
+				<h2>Shop — Selected Items</h2>
+				<div class="products">
+					<div class="product">
+						<img
+							src="./images/greeting-card-5.83x8.27-front-68a0e2ba2aee2-300x300.jpg"
+							alt="Product 1" />
+						<h3>Calm Currents 4 Greeting Card</h3>
+						<div class="price">&pound;3.99 — &pound;4.99</div>
+					</div>
+					<div class="product">
+						<img
+							src="./images/greeting-card-5.83x8.27-front-68a0e31a03442-300x300.jpg"
+							alt="Product 2" />
+						<h3>Calm Currents 6 Greeting Card</h3>
+						<div class="price">&pound;3.99 — &pound;4.99</div>
+					</div>
+					<div class="product">
+						<img
+							src="./images/greeting-card-5.83x8.27-front-68a0e23380ca1-300x300.jpg"
+							alt="Product 3" />
+						<h3>Calm Currents 2 Greeting Card</h3>
+						<div class="price">&pound;3.99 — &pound;4.99</div>
+					</div>
+					<div class="product">
+						<img
+							src="./images/greeting-card-5.83x8.27-front-68b7706ee5796-300x300.jpg"
+							alt="Product 4" />
+						<h3>Jorugumo Spider Woman Card</h3>
+						<div class="price">&pound;3.99 — &pound;4.99</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<%- include("component/footer") %>

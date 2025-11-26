@@ -35,8 +35,16 @@ router.get("/project", (req, res) => {
 	res.render("project");
 });
 
-router.get("/quotes", (req, res) => {
-	res.render("quotes");
+router.get("/quotes", async (req, res) => {
+
+	// i need to join liked_quotes with quotes to get the quote text
+	const { data, error } = await supabase
+		.from('liked_quotes')
+		.select(`quote:quotes(*)`)
+		.eq('userId', req.cookies.user_id);
+	console.log(data, error);
+
+	res.render("quotes", { savedQuotes: data });
 });
 
 export default router;

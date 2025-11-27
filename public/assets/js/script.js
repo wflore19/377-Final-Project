@@ -2,6 +2,7 @@ const currentPage = window.location.pathname;
 
 if (currentPage === '/') {
       const likeForm = document.querySelector('#like-quote');
+      const unlikeForm = document.querySelector('#unlike-quote');
       const submitBtn = document.querySelector('#like-submit-btn');
 
       if (likeForm) {
@@ -19,11 +20,26 @@ if (currentPage === '/') {
                   }
             });
       }
+
+      if (unlikeForm) {
+            unlikeForm.addEventListener('submit', async function (event) {
+                  event.preventDefault();
+                  const formData = new FormData(event.target);
+                  const quoteId = formData.get('quoteId');
+
+                  try {
+                        const response = await unlikeQuote(quoteId);
+
+                        if (response.status === 201) submitBtn.disabled = false;
+                  } catch (error) {
+                        console.error(error);
+                  }
+            });
+      }
 } else if (currentPage === '/about') {
 } else if (currentPage === '/project') {
 } else if (currentPage === '/quotes') {
       const quotesListEl = document.querySelectorAll('.quote');
-      console.log('Quotes list element:', quotesListEl);
 
       quotesListEl.forEach((quoteEl) => {
             const quoteId = quoteEl.id.split('-')[1];
@@ -94,7 +110,35 @@ async function likeQuote(quoteId) {
                   },
                   body: JSON.stringify({ quoteId: quoteId }),
             });
-            if (!response.ok) throw new Error('Failed to like quote');
+            if (response.status === 409)
+                  throw new Error('Quote already liked by user');
+
+            if (response.status !== 201)
+                  throw new Error('Failed to like quote');
+
+            return response;
+      } catch (error) {
+            throw error;
+      }
+}
+
+/**
+ * Fetch request to unlike a quote.
+ * Expects `quoteId` in the request body.
+ * Uses `user_id` from cookies to identify the user.
+ * @returns {Promise<Response>} The fetch response.
+ * @throws Will throw an error if the fetch operation fails.
+ */
+async function unlikeQuote(quoteId) {
+      try {
+            const response = await fetch('/quotes/unlike', {
+                  method: 'DELETE',
+                  headers: {
+                        'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ quoteId: quoteId }),
+            });
+            if (!response.ok) throw new Error('Failed to unlike quote');
 
             return response;
       } catch (error) {

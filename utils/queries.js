@@ -32,7 +32,7 @@ async function storeRandomQuote(quoteData) {
             .select()
             .single();
 
-      if (error) throw new Error('Failed to store random quote to supabase');
+      if (error) throw new Error(error.message);
       return data;
 }
 
@@ -47,7 +47,7 @@ async function fetchSavedQuotes(userId) {
             .select(`quote:quotes(*)`)
             .eq('userId', userId);
 
-      if (error) throw new Error('Failed to fetch saved quotes from supabase');
+      if (error) throw new Error(error.message);
       return data;
 }
 
@@ -63,10 +63,9 @@ async function isQuoteLikedByUser(userId, quoteId) {
             .from('liked_quotes')
             .select()
             .eq('userId', userId)
-            .eq('quoteId', quoteId)
-            .single();
+            .eq('quoteId', quoteId);
 
-      if (error) throw new Error('Failed to check if quote is liked by user');
+      if (error) throw new Error(error.message);
       return data;
 }
 
@@ -84,7 +83,27 @@ async function storeLikedQuote(userId, quoteId) {
             .select()
             .single();
 
-      if (error) throw new Error('Failed to store liked quote in supabase');
+      if (error) throw new Error(error.message);
+      return data;
+}
+
+/**
+ * Remove a liked quote for a user in supabase.
+ * @param {string} userId - The ID of the user.
+ * @param {number} quoteId - The ID of the quote.
+ * @returns {Promise<Object>} The deleted liked quote record.
+ * @throws Will throw an error if the operation fails.
+ */
+async function removeLikedQuote(userId, quoteId) {
+      const { data, error } = await supabase
+            .from('liked_quotes')
+            .delete()
+            .eq('userId', userId)
+            .eq('quoteId', quoteId)
+            .select()
+            .single();
+
+      if (error) throw new Error(error.message);
       return data;
 }
 
@@ -94,4 +113,5 @@ export {
       fetchSavedQuotes,
       isQuoteLikedByUser,
       storeLikedQuote,
+      removeLikedQuote,
 };

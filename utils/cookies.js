@@ -14,11 +14,9 @@ async function cookieMiddleware(req, res, next) {
                 { id: userId },
             ])
             .select()
-        console.log(data, error);
     
-        console.log(`New anonymous user assigned ID: ${userId}`);
     } else {
-        console.log(`User already has ID: ${req.cookies.user_id}`);
+        const userId = req.cookies.user_id;
     }
     next();
 }

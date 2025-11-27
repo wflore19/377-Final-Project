@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
 	try {
 		const response = await fetch("https://dummyjson.com/quotes/random");
 		const json = await response.json();
-		console.log(json);
 
 		res.render("index", { quote: json });
 
@@ -18,7 +17,7 @@ router.get("/", async (req, res) => {
 			{ id: json.id, quote: json.quote, author: json.author },
 		])
 		.select()
-		console.log(data, error);
+
 	} catch (error) {
 		console.error("Error fetching quote:", error);
 		// Fallback to rendering without quote
@@ -27,7 +26,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/about", (req, res) => {
-	console.log("About page requested");
 	res.render("about");
 });
 
@@ -36,13 +34,11 @@ router.get("/project", (req, res) => {
 });
 
 router.get("/quotes", async (req, res) => {
-
 	// i need to join liked_quotes with quotes to get the quote text
 	const { data, error } = await supabase
 		.from('liked_quotes')
 		.select(`quote:quotes(*)`)
 		.eq('userId', req.cookies.user_id);
-	console.log(data, error);
 
 	res.render("quotes", { savedQuotes: data });
 });

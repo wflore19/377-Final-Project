@@ -7,7 +7,6 @@ quotesRouter.post("/like", async (req, res) => {
 	const userId = req.cookies.user_id
 
 	const { quoteId } = req.body;
-	console.log(quoteId);
 
 	try {
 		// 1. CHECK if the quote is already liked by the user
@@ -20,8 +19,6 @@ quotesRouter.post("/like", async (req, res) => {
 		
 		// 2. QUOTE ALREADY LIKED
 		if (existingLike) {
-			console.log("Quote already liked");
-			// Use 200 OK or 204 No Content for idempotent success
 			return res.status(200).json({ message: "Quote already liked" });
 		}
 
@@ -34,7 +31,8 @@ quotesRouter.post("/like", async (req, res) => {
 			.select();
 
 		// 4. SUCCESS RESPONSE
-		console.log("Quote successfully liked:", newLike);
+		return res.status(201).json({ message: "Quote liked successfully" });
+		
 	} catch (e) {
 		// Catch any unexpected runtime errors
 		console.error("Unexpected error in like handler:", e);
@@ -57,7 +55,7 @@ quotesRouter.delete("/unlike", async (req, res) => {
 			.delete()
 			.eq('quoteId', quoteId)
 			.eq('userId', userId);
-		console.log("Quote successfully unliked:", data);
+
 		return res.status(200).json({ message: "Quote unliked successfully" });
 	} catch (error) {
 		console.error("Error unliking quote:", error);

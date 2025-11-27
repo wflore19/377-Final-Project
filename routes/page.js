@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
       try {
             const quote = await fetchRandomQuote();
-            const [newQuote] = await storeRandomQuote(quote);
+            const newQuote = await storeRandomQuote(quote);
 
             res.render('index', { quote: newQuote });
       } catch (error) {

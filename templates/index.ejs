@@ -1,7 +1,7 @@
-<%- include("component/head") %>
+<%- include("partials/head") %>
 <body>
       <div id="page-container">
-            <%- include("component/header") %>
+            <%- include("partials/header") %>
 
             <main id="main-area">
                   <section class="container">
@@ -31,7 +31,7 @@
                                           />
                                     </button>
                               </form>
-                              <% } %>
+                              <% } else if (error) { %> <% } %>
                         </div>
                         <% } else if (error) { %>
                         <p class="quote">
@@ -167,5 +167,5 @@
             </main>
       </div>
 
-      <%- include("component/footer") %>
+      <%- include("partials/footer") %>
 </body>

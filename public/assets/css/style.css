@@ -23,6 +23,9 @@ body {
         margin: 0 auto;
         padding: 18px 0;
 }
+button:hover {
+        cursor: pointer;
+}
 /* Top header */
 #top-header {
         background: var(--background-color);
@@ -30,14 +33,6 @@ body {
         border-bottom: 1px solid #eee;
         font-size: 14px;
 }
-/* #top-header .social-icons {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        margin: 6px 0;
-        padding: 0;
-        list-style: none;
-} */
 #top-header a {
         color: inherit;
         text-decoration: none;

@@ -5,20 +5,16 @@
 
             <main id="main-area">
                   <section class="container">
-                        <!-- Quotes go here -->
                         <% if (quote) { %>
-                        <div class="quote">
-                              <%= quote.quote %>
-                              <br />
-                              <span class="quote-author"
-                                    >— <%= quote.author || 'Unknown' %></span
-                              >
-                              <!-- like button -->
-                              <form
-                                    id="like-quote"
-                                    action="/quotes/like"
-                                    method="POST"
-                              >
+                        <div class="quote" id="quote-<%= quote.id %>">
+                              <blockquote>
+                                    <p>“<%= quote.quote %>”</p>
+                                    <cite
+                                          >— <%= quote.author || 'Unknown'
+                                          %></cite
+                                    >
+                              </blockquote>
+                              <form id="like-quote" method="POST">
                                     <input
                                           type="hidden"
                                           name="quoteId"

@@ -13,6 +13,8 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// Static files
+app.use(express.static(path.join(import.meta.dirname, "public")));
 // Logger Middleware
 app.use(morgan("dev"));
 // HTML template engine setup
@@ -25,8 +27,6 @@ app.use(express.json());
 // Form encoded Parser
 app.use(express.urlencoded()); 
 app.use(express.urlencoded({ extended: true }));
-// Static files
-app.use(express.static(path.join(import.meta.dirname, "public")));
 
 // API routes
 app.use("/quotes", quotesRouter);

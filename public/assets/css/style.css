@@ -30,14 +30,14 @@ body {
         border-bottom: 1px solid #eee;
         font-size: 14px;
 }
-#top-header .social-icons {
+/* #top-header .social-icons {
         display: flex;
         gap: 10px;
         align-items: center;
         margin: 6px 0;
         padding: 0;
         list-style: none;
-}
+} */
 #top-header a {
         color: inherit;
         text-decoration: none;

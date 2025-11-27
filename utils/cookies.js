@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import supabase from "../config/database.js";
+import supabase from "../utils/database.js";
 
 async function cookieMiddleware(req, res, next) {
     if (!req.cookies.user_id) {

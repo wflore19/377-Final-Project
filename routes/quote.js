@@ -1,5 +1,5 @@
 import express from "express";
-import supabase from "../config/database.js";
+import supabase from "../utils/database.js";
 
 const quotesRouter = express.Router();
 

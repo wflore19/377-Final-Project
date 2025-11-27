@@ -6,7 +6,7 @@
             <main id="main-area">
                   <section class="container">
                         <!-- Quotes go here -->
-                        <% if (quote && quote.quote) { %>
+                        <% if (quote) { %>
                         <div class="quote">
                               <%= quote.quote %>
                               <br />
@@ -24,21 +24,22 @@
                                           name="quoteId"
                                           value="<%= quote.id %>"
                                     />
-                                    <input
-                                          type="hidden"
-                                          name="quoteText"
-                                          value="<%= quote.quote %>"
-                                    />
-                                    <input
-                                          type="hidden"
-                                          name="quoteAuthor"
-                                          value="<%= quote.author %>"
-                                    />
                                     <button type="submit" id="like-submit-btn">
                                           Like
+                                          <img
+                                                src="./icons/Health-Medical/heart-3-line.svg"
+                                                alt=""
+                                                width="16"
+                                                height="16"
+                                          />
                                     </button>
                               </form>
                         </div>
+                        <% } else if (error) { %>
+                        <p class="quote">
+                              <%= error %>
+                              <a href="/quotes">See all quotes</a>
+                        </p>
                         <% } else { %>
                         <p class="quote">
                               No quote available.

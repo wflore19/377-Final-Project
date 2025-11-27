@@ -3,6 +3,11 @@ import supabase from '../utils/database.js';
 
 const quotesRouter = express.Router();
 
+/**
+ * Route to like a quote.
+ * Expects `quoteId` in the request body.
+ * Uses `user_id` from cookies to identify the user.
+ */
 quotesRouter.post('/like', async (req, res) => {
       const userId = req.cookies.user_id;
       const { quoteId } = req.body;
@@ -15,29 +20,20 @@ quotesRouter.post('/like', async (req, res) => {
                   .eq('userId', userId)
                   .single();
 
-            // 2. QUOTE ALREADY LIKED
-            if (existingLike) {
-                  return res.status(200).json({
-                        message: 'Quote already liked',
-                        success: false,
-                  });
-            }
+            if (existingLike) return res.status(409);
 
-            // 3. INSERT the new like record
             const { data: newLike, error: insertError } = await supabase
                   .from('liked_quotes')
                   .insert([{ userId: userId, quoteId: quoteId }])
-                  .select();
+                  .select()
+                  .single();
 
-            // 4. SUCCESS RESPONSE
             return res.status(201).json({
                   message: 'Quote liked successfully',
                   newLike: newLike,
-                  success: true,
             });
-      } catch (e) {
-            // Catch any unexpected runtime errors
-            console.error('Unexpected error in like handler:', e);
+      } catch (error) {
+            console.error('Unexpected error in like handler:', error);
             return res.status(500).json({
                   error: 'Internal Server Error',
                   details: 'An unexpected error occurred.',

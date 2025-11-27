@@ -26,6 +26,9 @@ body {
 button:hover {
       cursor: pointer;
 }
+button:disabled {
+      cursor: not-allowed;
+}
 /* Top header */
 #top-header {
       background: var(--background-color);

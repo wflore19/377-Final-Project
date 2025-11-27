@@ -7,8 +7,9 @@
 			<section class="container">
 				<!-- Quotes go here -->
 				<% if (quote && quote.quote) { %>
-				  <p class="quote">
-				    <%= quote.quote %><br>
+				  <div class="quote">
+				    <%= quote.quote %>
+					<br>
 				    <span class="quote-author">— <%= quote.author || 'Unknown' %></span>
 					<!-- like button -->
 					<form id="like-quote" action="/quotes/like" method="POST">
@@ -17,7 +18,7 @@
 						<input type="hidden" name="quoteAuthor" value="<%= quote.author %>">
 						<button type="submit" id="like-submit-btn">Like</button>
 					</form>
-				  </p>
+				  </div>
 				<% } else { %>
 				  <p class="quote">No quote available. <a href="/quotes">See all quotes</a></p>
 				<% } %>

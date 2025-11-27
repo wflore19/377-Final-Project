@@ -258,22 +258,11 @@ footer {
       max-width: 720px;
       margin: 12px 0 18px 0;
 }
-.quote-author {
-      display: block;
-      margin-top: 10px;
-      font-style: normal;
-      font-weight: 700;
-      color: #444;
-      font-size: 16px;
-}
 
 @media (max-width: 720px) {
       .quote {
             font-size: 18px;
             padding: 14px;
-      }
-      .quote-author {
-            font-size: 15px;
       }
 }
 

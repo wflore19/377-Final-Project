@@ -20,18 +20,18 @@
       <section class="section container">
         <h2>My Saved Quotes</h2>
         <% if (savedQuotes && savedQuotes.length > 0) { %>
-          <div class="quotes_list">
+          <div class="quotes-list">
             <% savedQuotes.forEach((item) => { %>
-              <blockquote>
+              <blockquote class="quote" id="quote-<%= item.quote.id %>">
                 <p>“<%= item.quote.quote %>”</p>
                 <cite>— <%= item.quote.author || 'Unknown' %></cite>
+                <form id="unlike-quote-<%= item.quote.id %>" method="DELETE">
+                  <input type="hidden" name="quoteId" value="<%= item.quote.id %>">
+                  <input type="hidden" name="quoteText" value="<%= item.quote.quote %>">
+                  <input type="hidden" name="quoteAuthor" value="<%= item.quote.author %>">
+                  <button type="submit">Unlike</button>
+                </form>
               </blockquote>
-              <form id="unlike-quote" method="DELETE">
-                <input type="hidden" name="quoteId" value="<%= item.quote.id %>">
-                <input type="hidden" name="quoteText" value="<%= item.quote.quote %>">
-                <input type="hidden" name="quoteAuthor" value="<%= item.quote.author %>">
-                <button type="submit">Unlike</button>
-              </form>
             <% }); %>
           </div>
         <% } else { %>

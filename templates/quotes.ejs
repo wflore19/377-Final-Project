@@ -39,17 +39,8 @@
                                                 'Unknown' %></cite
                                           >
                                     </blockquote>
-                                    <form
-                                          id="unlike-quote-<%= item.quote.id %>"
-                                          method="DELETE"
-                                    >
-                                          <input
-                                                type="hidden"
-                                                name="quoteId"
-                                                value="<%= item.quote.id %>"
-                                          />
-                                          <button type="submit">Unlike</button>
-                                    </form>
+                                    <%- include("components/unlikeButton", {
+                                    quoteId: item.quote.id }) %>
                               </div>
                               <% }); %>
                         </div>

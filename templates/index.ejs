@@ -14,24 +14,13 @@
                                           %></cite
                                     >
                               </blockquote>
-                              <% if (!error) { %>
-                              <form id="like-quote" method="POST">
-                                    <input
-                                          type="hidden"
-                                          name="quoteId"
-                                          value="<%= quote.id %>"
-                                    />
-                                    <button type="submit" id="like-submit-btn">
-                                          Like
-                                          <img
-                                                src="./icons/heart-3-line.svg"
-                                                alt=""
-                                                width="16"
-                                                height="16"
-                                          />
-                                    </button>
-                              </form>
-                              <% } else if (error) { %> <% } %>
+                              <div id="formContainer">
+                                    <% if (!error) { %> <%-
+                                    include("components/likeButton", { quoteId:
+                                    quote.id }) %> <% } else { %> <%-
+                                    include("components/unlikeButton", {
+                                    quoteId: quote.id }) %> <% } %>
+                              </div>
                         </div>
                         <% } else if (error) { %>
                         <p class="quote">

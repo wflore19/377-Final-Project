@@ -7,15 +7,14 @@ const router = express.Router();
 router.get('/', async (req, res) => {
       try {
             const quote = await fetchRandomQuote();
+            const [newQuote] = await storeRandomQuote(quote);
 
-            res.render('index', { quote: quote });
-
-            const newQuote = await storeRandomQuote(quote);
-            res.status(200).json(newQuote);
+            res.render('index', { quote: newQuote });
       } catch (error) {
             console.error('Error fetching quote:', error);
-            // Fallback to rendering without quote
-            res.render('index');
+            res.status(500).render('index', {
+                  error: 'Unable to load quote at this time',
+            });
       }
 });
 

@@ -36,4 +36,19 @@ async function storeRandomQuote(quoteData) {
       return data;
 }
 
-export { fetchRandomQuote, storeRandomQuote };
+/**
+ * Fetch saved quotes for a specific user from supabase.
+ * @param {string} userId - The ID of the user whose saved quotes are to be fetched.
+ * @returns {Promise<Array>} An array of saved quote objects.
+ */
+async function fetchSavedQuotes(userId) {
+      const { data, error } = await supabase
+            .from('liked_quotes')
+            .select(`quote:quotes(*)`)
+            .eq('userId', userId);
+
+      if (error) throw new Error('Failed to fetch saved quotes from supabase');
+      return data;
+}
+
+export { fetchRandomQuote, storeRandomQuote, fetchSavedQuotes };

@@ -33,7 +33,7 @@
                                     id="quote-<%= item.quote.id %>"
                               >
                                     <blockquote>
-                                          <p>“<%= item.quote.quote %>”</p>
+                                          <p>“<%= item.quote.quote %></p>
                                           <cite
                                                 >— <%= item.quote.author ||
                                                 'Unknown' %></cite
@@ -53,6 +53,8 @@
                               </div>
                               <% }); %>
                         </div>
+                        <% } else if (error) { %>
+                        <p class="quote"><%= error %></p>
                         <% } else { %>
                         <p>No saved quotes found.</p>
                         <% } %>

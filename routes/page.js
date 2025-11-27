@@ -1,6 +1,9 @@
 import express from 'express';
-import supabase from '../utils/database.js';
-import { fetchRandomQuote, storeRandomQuote } from '../utils/queries.js';
+import {
+      fetchRandomQuote,
+      fetchSavedQuotes,
+      storeRandomQuote,
+} from '../utils/queries.js';
 
 const router = express.Router();
 
@@ -26,12 +29,15 @@ router.get('/project', (req, res) => {
 });
 
 router.get('/quotes', async (req, res) => {
-      const { data, error } = await supabase
-            .from('liked_quotes')
-            .select(`quote:quotes(*)`) // rename quotes to quote for cosmetics
-            .eq('userId', req.cookies.user_id);
-
-      res.render('quotes', { savedQuotes: data });
+      try {
+            const savedQuotes = await fetchSavedQuotes(req.cookies.user_id);
+            res.render('quotes', { savedQuotes: savedQuotes, error: null });
+      } catch (error) {
+            res.status(500).render('quotes', {
+                  savedQuotes: null,
+                  error: 'Unable to load saved quotes at this time',
+            });
+      }
 });
 
 export default router;

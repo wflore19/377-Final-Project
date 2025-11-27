@@ -1,4 +1,4 @@
-import supabase from "./database.js";
+import supabase from './database.js';
 
 /**
  * Fetches a random quote from the dummyjson API.
@@ -6,12 +6,12 @@ import supabase from "./database.js";
  * @throws Will throw an error if the fetch operation fails.
  */
 async function fetchRandomQuote() {
-        const response = await fetch("https://dummyjson.com/quotes/random");
+      const response = await fetch('https://dummyjson.com/quotes/random');
 
-        if (!response.ok) throw new Error("Failed to fetch random quote");
+      if (!response.ok) throw new Error('Failed to fetch random quote');
 
-        const json = await response.json();
-        return json;
+      const json = await response.json();
+      return json;
 }
 
 /**
@@ -20,14 +20,20 @@ async function fetchRandomQuote() {
  * @throws Will throw an error if the operation fails.
  */
 async function storeRandomQuote(quoteData) {
-        const { data, error } = await supabase
-                .from('quotes')
-                .insert([
-                        { id: quoteData.id, quote: quoteData.quote, author: quoteData.author },
-                ])
-                .select();
-        if (error) throw new Error("Failed to store random quote to supabase");
-        return data;
+      const { data, error } = await supabase
+            .from('quotes')
+            .insert([
+                  {
+                        id: quoteData.id,
+                        quote: quoteData.quote,
+                        author: quoteData.author,
+                  },
+            ])
+            .select()
+            .single();
+
+      if (error) throw new Error('Failed to store random quote to supabase');
+      return data;
 }
 
 export { fetchRandomQuote, storeRandomQuote };

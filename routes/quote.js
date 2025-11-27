@@ -1,5 +1,6 @@
 import express from 'express';
 import supabase from '../utils/database.js';
+import { isQuoteLikedByUser, storeLikedQuote } from '../utils/queries.js';
 
 const quotesRouter = express.Router();
 
@@ -11,33 +12,24 @@ const quotesRouter = express.Router();
 quotesRouter.post('/like', async (req, res) => {
       const userId = req.cookies.user_id;
       const { quoteId } = req.body;
-
       try {
-            const { data: existingLike, error: selectError } = await supabase
-                  .from('liked_quotes')
-                  .select()
-                  .eq('quoteId', quoteId)
-                  .eq('userId', userId)
-                  .single();
+            const likedQuote = await isQuoteLikedByUser(userId, quoteId);
+            if (likedQuote)
+                  return res.status(409).json({
+                        newLike: likedQuote,
+                        error: 'Quote already liked by user',
+                  });
 
-            if (existingLike) return res.status(409);
-
-            const { data: newLike, error: insertError } = await supabase
-                  .from('liked_quotes')
-                  .insert([{ userId: userId, quoteId: quoteId }])
-                  .select()
-                  .single();
+            const newLikedQuote = await storeLikedQuote(userId, quoteId);
 
             return res.status(201).json({
-                  message: 'Quote liked successfully',
-                  newLike: newLike,
+                  newLike: newLikedQuote,
+                  error: null,
             });
       } catch (error) {
-            console.error('Unexpected error in like handler:', error);
             return res.status(500).json({
+                  newLike: null,
                   error: 'Internal Server Error',
-                  details: 'An unexpected error occurred.',
-                  success: false,
             });
       }
 });

@@ -37,7 +37,7 @@ async function storeRandomQuote(quoteData) {
 }
 
 /**
- * Fetch saved quotes for a specific user from supabase.
+ * Fetches saved quotes for a specific user from supabase.
  * @param {string} userId - The ID of the user whose saved quotes are to be fetched.
  * @returns {Promise<Array>} An array of saved quote objects.
  */
@@ -51,4 +51,47 @@ async function fetchSavedQuotes(userId) {
       return data;
 }
 
-export { fetchRandomQuote, storeRandomQuote, fetchSavedQuotes };
+/**
+ * Checks if a quote is already liked by a user.
+ * @param {string} userId - The ID of the user.
+ * @param {number} quoteId - The ID of the quote.
+ * @returns {Promise<boolean>} True if the quote is liked by the user, false otherwise.
+ * @throws Will throw an error if the operation fails.
+ */
+async function isQuoteLikedByUser(userId, quoteId) {
+      const { data, error } = await supabase
+            .from('liked_quotes')
+            .select()
+            .eq('userId', userId)
+            .eq('quoteId', quoteId)
+            .single();
+
+      if (error) throw new Error('Failed to check if quote is liked by user');
+      return data;
+}
+
+/**
+ * Stores a liked quote for a user in supabase.
+ * @param {string} userId - The ID of the user.
+ * @param {number} quoteId - The ID of the quote.
+ * @returns {Promise<Object>} The newly created liked quote record.
+ * @throws Will throw an error if the operation fails.
+ */
+async function storeLikedQuote(userId, quoteId) {
+      const { data, error } = await supabase
+            .from('liked_quotes')
+            .insert([{ userId: userId, quoteId: quoteId }])
+            .select()
+            .single();
+
+      if (error) throw new Error('Failed to store liked quote in supabase');
+      return data;
+}
+
+export {
+      fetchRandomQuote,
+      storeRandomQuote,
+      fetchSavedQuotes,
+      isQuoteLikedByUser,
+      storeLikedQuote,
+};

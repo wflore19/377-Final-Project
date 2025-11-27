@@ -3,6 +3,7 @@
 import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
+import morgan from "morgan";
 
 import pageRouter from "./routes/page.js";
 import quotesRouter from "./routes/quote.js";
@@ -12,6 +13,8 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// Logger Middleware
+app.use(morgan("dev"));
 // HTML template engine setup
 app.set("views", path.join(import.meta.dirname, "templates"));
 app.set("view engine", "ejs");

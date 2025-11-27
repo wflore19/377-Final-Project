@@ -1,64 +1,99 @@
 <%- include("component/head") %>
 <body>
-	<div id="page-container">
-		<%- include("component/header") %>
+      <div id="page-container">
+            <%- include("component/header") %>
 
-    <main id="main-area">
-      <section class="hero container">
-        <div class="columns">
-          <div class="col">
-            <h4>Words to Hold</h4>
-            <h5>Selected Zen Quotes</h5>
-            <p>A small collection of quotes to inspire practice and reflection.</p>
-          </div>
-          <div class="col">
-            <img src="images/zen_books_rotation_fade_white_hold.gif" alt="Books">
-          </div>
-        </div>
-      </section>
+            <main id="main-area">
+                  <section class="hero container">
+                        <div class="columns">
+                              <div class="col">
+                                    <h4>Words to Hold</h4>
+                                    <h5>Selected Zen Quotes</h5>
+                                    <p>
+                                          A small collection of quotes to
+                                          inspire practice and reflection.
+                                    </p>
+                              </div>
+                              <div class="col">
+                                    <img
+                                          src="images/zen_books_rotation_fade_white_hold.gif"
+                                          alt="Books"
+                                    />
+                              </div>
+                        </div>
+                  </section>
 
-      <section class="section container">
-        <h2>My Saved Quotes</h2>
-        <% if (savedQuotes && savedQuotes.length > 0) { %>
-          <div class="quotes-list">
-            <% savedQuotes.forEach((item) => { %>
-              <blockquote class="quote" id="quote-<%= item.quote.id %>">
-                <p>“<%= item.quote.quote %>”</p>
-                <cite>— <%= item.quote.author || 'Unknown' %></cite>
-                <form id="unlike-quote-<%= item.quote.id %>" method="DELETE">
-                  <input type="hidden" name="quoteId" value="<%= item.quote.id %>">
-                  <input type="hidden" name="quoteText" value="<%= item.quote.quote %>">
-                  <input type="hidden" name="quoteAuthor" value="<%= item.quote.author %>">
-                  <button type="submit">Unlike</button>
-                </form>
-              </blockquote>
-            <% }); %>
-          </div>
-        <% } else { %>
-          <p>No saved quotes found.</p>
-        <% } %>
-      </section>
+                  <section class="section container">
+                        <h2>My Saved Quotes</h2>
+                        <% if (savedQuotes && savedQuotes.length > 0) { %>
+                        <div class="quotes-list">
+                              <% savedQuotes.forEach((item) => { %>
+                              <blockquote
+                                    class="quote"
+                                    id="quote-<%= item.quote.id %>"
+                              >
+                                    <p>“<%= item.quote.quote %>”</p>
+                                    <cite
+                                          >— <%= item.quote.author || 'Unknown'
+                                          %></cite
+                                    >
+                                    <form
+                                          id="unlike-quote-<%= item.quote.id %>"
+                                          method="DELETE"
+                                    >
+                                          <input
+                                                type="hidden"
+                                                name="quoteId"
+                                                value="<%= item.quote.id %>"
+                                          />
+                                          <input
+                                                type="hidden"
+                                                name="quoteText"
+                                                value="<%= item.quote.quote %>"
+                                          />
+                                          <input
+                                                type="hidden"
+                                                name="quoteAuthor"
+                                                value="<%= item.quote.author %>"
+                                          />
+                                          <button type="submit">Unlike</button>
+                                    </form>
+                              </blockquote>
+                              <% }); %>
+                        </div>
+                        <% } else { %>
+                        <p>No saved quotes found.</p>
+                        <% } %>
+                  </section>
 
-      <section class="section container">
-        <h2>Quotations</h2>
-        <div class="quotes_list">
-          <blockquote>
-            <p>“Sitting quietly, doing nothing, spring comes, and the grass grows by itself.”</p>
-            <cite>— Zen Proverb</cite>
-          </blockquote>
+                  <section class="section container">
+                        <h2>Quotations</h2>
+                        <div class="quotes_list">
+                              <blockquote>
+                                    <p>
+                                          “Sitting quietly, doing nothing,
+                                          spring comes, and the grass grows by
+                                          itself.”
+                                    </p>
+                                    <cite>— Zen Proverb</cite>
+                              </blockquote>
 
-          <blockquote>
-            <p>“The obstacle is the path.”</p>
-            <cite>— Zen Saying</cite>
-          </blockquote>
+                              <blockquote>
+                                    <p>“The obstacle is the path.”</p>
+                                    <cite>— Zen Saying</cite>
+                              </blockquote>
 
-          <blockquote>
-            <p>“When you realize nothing is lacking, the whole world belongs to you.”</p>
-            <cite>— Lao Tzu</cite>
-          </blockquote>
-        </div>
-      </section>
+                              <blockquote>
+                                    <p>
+                                          “When you realize nothing is lacking,
+                                          the whole world belongs to you.”
+                                    </p>
+                                    <cite>— Lao Tzu</cite>
+                              </blockquote>
+                        </div>
+                  </section>
+            </main>
 
-    </main>
-
-	<%- include("component/footer") %>
+            <%- include("component/footer") %>
+      </div>
+</body>

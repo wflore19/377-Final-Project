@@ -16,9 +16,6 @@ if (currentPage === '/') {
                         if (response.status === 201) submitBtn.disabled = true;
                   } catch (error) {
                         console.error('Error liking quote:', error);
-                        console.log(
-                              'There was an error liking the quote. Please try again.'
-                        );
                   }
             });
       }

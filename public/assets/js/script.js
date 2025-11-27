@@ -5,32 +5,15 @@ if (currentPage === '/') {
       const submitBtn = document.querySelector('#like-submit-btn');
 
       if (likeForm) {
-            likeForm.addEventListener('submit', async function (event) {
+            likeForm.addEventListener('submit', async (event) => {
                   event.preventDefault();
+                  const formData = new FormData(event.target);
+                  const quoteId = formData.get('quoteId');
 
                   try {
-                        const formData = new FormData(event.target);
-                        const quoteId = formData.get('quoteId');
-                        const quoteText = formData.get('quoteText');
-                        const quoteAuthor = formData.get('quoteAuthor');
+                        const response = await likeQuote(quoteId);
 
-                        const response = await fetch('/quotes/like', {
-                              method: 'POST',
-                              headers: {
-                                    'Content-Type': 'application/json',
-                              },
-                              body: JSON.stringify({
-                                    quoteId: quoteId,
-                                    quoteText: quoteText,
-                                    quoteAuthor: quoteAuthor,
-                              }),
-                        });
-
-                        const result = await response.json();
-
-                        if (result.success) {
-                              submitBtn.disabled = true;
-                        }
+                        if (response.status === 201) submitBtn.disabled = true;
                   } catch (error) {
                         console.error('Error liking quote:', error);
                         console.log(
@@ -96,4 +79,28 @@ if (currentPage === '/') {
                   });
             }
       });
+}
+
+/**
+ * Fetch request to like a quote.
+ * Expects `quoteId` in the request body.
+ * Uses `user_id` from cookies to identify the user.
+ * @returns {Promise<Response>} The fetch response.
+ * @throws Will throw an error if the fetch operation fails.
+ */
+async function likeQuote(quoteId) {
+      try {
+            const response = await fetch('/quotes/like', {
+                  method: 'POST',
+                  headers: {
+                        'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ quoteId: quoteId }),
+            });
+            if (!response.ok) throw new Error('Failed to like quote');
+
+            return response;
+      } catch (error) {
+            throw error;
+      }
 }

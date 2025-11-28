@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // HTML template engine setup
-app.set('views', path.join(import.meta.dirname, 'templates'));
+app.set('views', path.join(import.meta.dirname, 'views'));
 app.set('view engine', 'ejs');
 // Static files
 app.use(express.static(path.join(import.meta.dirname, 'public')));

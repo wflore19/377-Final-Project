@@ -80,14 +80,9 @@ nav#top-menu-nav {
       text-decoration: none;
       font-weight: 600;
 }
-#et_search_icon {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      background: transparent;
-      vertical-align: middle;
+.mobile-nav {
+      display: none;
 }
-
 /* Mobile nav toggle (simple) */
 @media (max-width: 880px) {
       .logo_container,
@@ -99,8 +94,59 @@ nav#top-menu-nav {
             flex-direction: column;
             display: none;
       }
-      #et_mobile_nav_menu .mobile_nav {
+      .mobile-nav {
             display: block;
+      }
+      .mobile-nav .mobile-nav-icon {
+            display: inline-block;
+            cursor: pointer;
+            padding: 8px;
+      }
+      .mobile-nav .mobile-nav-icon:hover {
+            background-color: #f7f7f7;
+            border-radius: 8px;
+      }
+      .mobile-nav .mobile-nav-icon span {
+            display: block;
+            height: 4px;
+            background: #222;
+            margin: 4px 0;
+            width: 32px;
+      }
+      .mobile-nav .mobile-nav-menu {
+            display: block;
+            background: #f9f9f9;
+            padding: 12px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin-top: 8px;
+      }
+      .mobile-nav .mobile-nav-menu.hidden {
+            display: none;
+            padding: 0;
+            border: none;
+            margin-top: 0;
+            background: none;
+            border-radius: 0;
+      }
+      .mobile-nav .mobile-nav-menu .mobile-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0 0;
+      }
+      .mobile-nav .mobile-nav-menu .mobile-nav-list li {
+            margin: 8px 0;
+      }
+      .mobile-nav .mobile-nav-menu .mobile-nav-list li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 4px;
+      }
+      .mobile-nav .mobile-nav-menu .mobile-nav-list li a:hover {
+            background-color: #e0e0e0;
       }
 }
 

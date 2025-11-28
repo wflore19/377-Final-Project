@@ -70,6 +70,12 @@ if (currentPage === '/') {
       });
 }
 
+const mobileNavIcon = document.getElementById('mobile-nav-icon');
+mobileNavIcon.addEventListener('click', () => {
+      const mobileNavMenu = document.getElementById('mobile-nav-menu');
+      mobileNavMenu.classList.toggle('hidden');
+});
+
 /**
  * Fetch request to like a quote.
  * Expects `quoteId` in the request body.

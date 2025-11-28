@@ -76,6 +76,20 @@ mobileNavIcon.addEventListener('click', () => {
       mobileNavMenu.classList.toggle('hidden');
 });
 
+const dateEl = document.getElementById('date');
+const date = document.createElement('span');
+date.textContent = dayjs().format('MMMM D, YYYY');
+dateEl.appendChild(date);
+const spanEl = document.createElement('span');
+spanEl.style.fontSize = '0.7em';
+spanEl.style.fontStyle = 'italic';
+spanEl.textContent = ' powered by ';
+dateEl.appendChild(spanEl);
+const dayjsLink = document.createElement('a');
+dayjsLink.href = 'https://day.js.org/';
+dayjsLink.textContent = 'Day.js';
+spanEl.appendChild(dayjsLink);
+
 /**
  * Fetch request to like a quote.
  * Expects `quoteId` in the request body.

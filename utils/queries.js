@@ -15,6 +15,23 @@ async function fetchRandomQuote() {
 }
 
 /**
+ * Stores a new user in supabase.
+ * @param {string} userId - The ID of the new user.
+ * @returns {Promise<Object>} The newly created user record.
+ * @throws Will throw an error if the operation fails.
+ */
+async function storeNewUser(userId) {
+      const { data, error } = await supabase
+            .from('users')
+            .insert([{ id: userId }])
+            .select()
+            .single();
+
+      if (error) throw new Error(error.message);
+      return data;
+}
+
+/**
  * Stores random quote from the dummyjson API to supabase.
  * @returns {Promise<Object>} An object containing random quote data.
  * @throws Will throw an error if the operation fails.
@@ -114,4 +131,5 @@ export {
       isQuoteLikedByUser,
       storeLikedQuote,
       removeLikedQuote,
+      storeNewUser,
 };

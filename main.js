@@ -13,13 +13,13 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// HTML template engine setup
+app.set('views', path.join(import.meta.dirname, 'templates'));
+app.set('view engine', 'ejs');
 // Static files
 app.use(express.static(path.join(import.meta.dirname, 'public')));
 // Logger Middleware
 app.use(morgan('dev'));
-// HTML template engine setup
-app.set('views', path.join(import.meta.dirname, 'templates'));
-app.set('view engine', 'ejs');
 // Cookie Parser Middleware
 app.use(cookieParser());
 // Json Parser
@@ -35,5 +35,5 @@ app.use('/quotes', quotesRouter);
 app.use('/', cookieMiddleware, pageRouter);
 
 app.listen(PORT, () => {
-	console.log(`Listening on: http://localhost:${PORT}`);
+      console.log(`Listening on: http://localhost:${PORT}`);
 });

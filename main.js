@@ -19,7 +19,18 @@ app.set('view engine', 'ejs');
 // Static files
 app.use(express.static(path.join(import.meta.dirname, 'public')));
 // Logger Middleware
-app.use(morgan('dev'));
+morgan.token('date-est', (req, res) => {
+      return new Date()
+            .toLocaleString('en-US', {
+                  timeZone: 'America/New_York',
+            })
+            .replace(/ /g, '');
+});
+app.use(
+      morgan(
+            ':remote-addr :remote-user :date-est :method ":url" :status :response-time ms ":referrer"'
+      )
+);
 // Cookie Parser Middleware
 app.use(cookieParser());
 // Json Parser

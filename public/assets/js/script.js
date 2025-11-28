@@ -18,7 +18,7 @@ if (currentPage === '/') {
                               renderUnlikeForm(quoteId);
                         }
                   } catch (error) {
-                        console.error('Error liking quote:', error);
+                        console.error(error);
                   }
             });
       }
@@ -44,7 +44,7 @@ if (currentPage === '/') {
 } else if (currentPage === '/about') {
 } else if (currentPage === '/project') {
 } else if (currentPage === '/quotes') {
-      const quotesListEl = document.querySelectorAll('.quote');
+      const quotesListEl = document.querySelectorAll('[id^="quote"]');
 
       quotesListEl.forEach((quoteEl) => {
             const quoteId = quoteEl.id.split('-')[1];
@@ -70,9 +70,9 @@ if (currentPage === '/') {
       });
 }
 
-const mobileNavIcon = document.getElementById('mobile-nav-icon');
+const mobileNavIcon = document.getElementById('mobile-nav__icon');
 mobileNavIcon.addEventListener('click', () => {
-      const mobileNavMenu = document.getElementById('mobile-nav-menu');
+      const mobileNavMenu = document.getElementById('mobile-nav__menu');
       mobileNavMenu.classList.toggle('hidden');
 });
 
@@ -146,7 +146,7 @@ async function unlikeQuote(quoteId) {
  * @returns {string} HTML for the like form.
  */
 function renderLikeForm(quoteId) {
-      const formContainerEl = document.getElementById('formContainer');
+      const formContainerEl = document.getElementById('form-container');
 
       const form = document.createElement('form');
       form.id = 'like-quote';
@@ -167,7 +167,6 @@ function renderLikeForm(quoteId) {
       const icon = document.createElement('img');
       icon.src = './icons/heart-3-line.svg';
       icon.alt = 'Like Icon';
-      icon.id = 'like-icon';
       icon.width = 16;
       icon.height = 16;
       button.appendChild(icon);
@@ -196,7 +195,7 @@ function renderLikeForm(quoteId) {
  * @returns {string} HTML for the unlike form.
  */
 function renderUnlikeForm(quoteId) {
-      const formContainerEl = document.getElementById('formContainer');
+      const formContainerEl = document.getElementById('form-container');
 
       const form = document.createElement('form');
       form.id = `#unlike-quote-${quoteId}`;
@@ -217,7 +216,6 @@ function renderUnlikeForm(quoteId) {
       const icon = document.createElement('img');
       icon.src = './icons/heart-3-fill.svg';
       icon.alt = 'Unlike Icon';
-      icon.id = 'unlike-icon';
       icon.width = 16;
       icon.height = 16;
       button.appendChild(icon);

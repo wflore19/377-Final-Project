@@ -17,7 +17,7 @@ Example.car = function () {
 
       // create renderer
       var render = Render.create({
-            element: document.querySelector('.render-container'),
+            element: document.getElementById('renderAnimation'),
             engine: engine,
             options: {
                   width: 800,

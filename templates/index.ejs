@@ -3,7 +3,7 @@
       <div id="page-container">
             <%- include("partials/header") %>
 
-            <main id="main-area">
+            <main>
                   <section class="container">
                         <div id="date"></div>
                         <% if (quote) { %>
@@ -15,7 +15,7 @@
                                           %></cite
                                     >
                               </blockquote>
-                              <div id="formContainer">
+                              <div id="form-container">
                                     <% if (!error) { %> <%-
                                     include("components/likeButton", { quoteId:
                                     quote.id }) %> <% } else { %> <%-

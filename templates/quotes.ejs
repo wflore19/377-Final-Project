@@ -3,7 +3,7 @@
       <div id="page-container">
             <%- include("partials/header") %>
 
-            <main id="main-area">
+            <main>
                   <section class="hero container">
                         <div id="date"></div>
                         <div class="columns">
@@ -27,7 +27,7 @@
                   <section class="section container">
                         <h2>My Saved Quotes</h2>
                         <% if (savedQuotes && savedQuotes.length > 0) { %>
-                        <div class="quotes-list">
+                        <div>
                               <% savedQuotes.forEach((item) => { %>
                               <div
                                     class="quote"
@@ -50,33 +50,6 @@
                         <% } else { %>
                         <p>No saved quotes found.</p>
                         <% } %>
-                  </section>
-
-                  <section class="section container">
-                        <h2>Quotations</h2>
-                        <div class="quotes_list">
-                              <blockquote>
-                                    <p>
-                                          “Sitting quietly, doing nothing,
-                                          spring comes, and the grass grows by
-                                          itself.”
-                                    </p>
-                                    <cite>— Zen Proverb</cite>
-                              </blockquote>
-
-                              <blockquote>
-                                    <p>“The obstacle is the path.”</p>
-                                    <cite>— Zen Saying</cite>
-                              </blockquote>
-
-                              <blockquote>
-                                    <p>
-                                          “When you realize nothing is lacking,
-                                          the whole world belongs to you.”
-                                    </p>
-                                    <cite>— Lao Tzu</cite>
-                              </blockquote>
-                        </div>
                   </section>
             </main>
 

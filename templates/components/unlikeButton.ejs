@@ -1,12 +1,6 @@
 <form id="unlike-quote-<%= quoteId %>" method="DELETE">
       <input type="hidden" name="quoteId" value="<%= quoteId %>" />
-      <button type="submit">
-            Unlike
-            <img
-                  src="./icons/heart-3-fill.svg"
-                  alt="Unlike Icon"
-                  width="16"
-                  height="16"
-            />
+      <button type="submit" id="unlike-submit-btn">
+            Unlike <%- include("../icons/unlike") %>
       </button>
 </form>

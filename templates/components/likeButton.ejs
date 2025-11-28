@@ -1,7 +1,6 @@
 <form id="like-quote-<%= quoteId %>" method="POST">
       <input type="hidden" name="quoteId" value="<%= quoteId %>" />
       <button type="submit" id="like-submit-btn">
-            Like
-            <img src="./icons/heart-3-line.svg" alt="" width="16" height="16" />
+            Like <%- include("../icons/like") %>
       </button>
 </form>
